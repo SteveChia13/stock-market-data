@@ -1,6 +1,6 @@
 # Use variables for readability
 PYTHON=python3
-VENV=stock-market-project-venv
+VENV=.venv/stock-market-project-venv
 
 # Create virtual environment
 dev:

@@ -1,2 +1,2 @@
-json
 polygon-api-client
+google-cloud-bigquery
