@@ -1,7 +1,7 @@
-import config
+from src import config
 from google.cloud import bigquery
-from bigquery_loader import bq_dataset_check, load_data_to_bq
-from fetch_data import fetch_polygon_data
+from src.bigquery_loader import bq_dataset_check, load_data_to_bq
+from src.fetch_data import fetch_polygon_data
 
 TICKER = "AAPL"
 DATE = "2025-10-01"
@@ -24,7 +24,7 @@ def main():
     dataset_ref = bq_dataset_check(client_bq, DATASET_ID)
     load_data_to_bq(client_bq, dataset_ref, DATASET_ID, TABLE_ID, records)
 
-    print("🎉 ETL complete!")
+    print("🎉 Raw data loaded successfully!")
 
 if __name__ == "__main__":
     main()
