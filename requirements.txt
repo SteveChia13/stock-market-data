@@ -1,3 +1,5 @@
 polygon-api-client
 google-cloud-bigquery
 apache-airflow
+dbt-core 
+dbt-bigquery
