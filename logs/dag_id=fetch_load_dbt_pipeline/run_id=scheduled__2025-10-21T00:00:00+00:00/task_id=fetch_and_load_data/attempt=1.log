@@ -1,0 +1,15 @@
+{"timestamp":"2025-10-21T14:53:55.044631Z","level":"info","event":"DAG bundles loaded: dags-folder, example_dags","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":179}
+{"timestamp":"2025-10-21T14:53:55.045113Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/fetch_and_load_data_dag.py","logger":"airflow.models.dagbag.DagBag","filename":"dagbag.py","lineno":593}
+{"timestamp":"2025-10-21T14:53:55.598399Z","level":"info","event":"Task instance is in running state","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:53:55.598502Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.QUEUED","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:53:55.598619Z","level":"info","event":"Current task name:fetch_and_load_data","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:53:55.598692Z","level":"info","event":"Dag name:fetch_load_dbt_pipeline","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:53:55.967656Z","level":"info","event":"ETL process starting...","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:53:59.261491Z","level":"info","event":"Dataset 'stock_market_ticker_raw' exists.","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:53:59.716950Z","level":"info","event":"Table 'aapl_raw' exists.","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:54:06.072020Z","level":"info","event":"✅ Uploaded 1 rows to stock_market_ticker_raw.aapl_raw","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:54:06.072184Z","level":"info","event":"🎉 Raw data loaded successfully!","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:54:06.072469Z","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator","filename":"python.py","lineno":218}
+{"timestamp":"2025-10-21T14:54:06.087127Z","level":"info","event":"Task instance in success state","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:54:06.087239Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.RUNNING","logger":"task.stdout"}
+{"timestamp":"2025-10-21T14:54:06.087358Z","level":"info","event":"Task operator:<Task(PythonOperator): fetch_and_load_data>","logger":"task.stdout"}
