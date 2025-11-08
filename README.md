@@ -1,35 +1,45 @@
-# 🧠 S&P 500 Data Engineering Pipeline
+# Project README — corrected
 
-A personal project to practice **data engineering** concepts and tools — including **Python**, **Airflow**, **dbt**, **BigQuery**, and **Docker** — by building a fully automated pipeline that collects and transforms **S&P 500 minute-interval stock data**.
+Short description
+This repository implements a small ETL that fetches daily aggregate stock data for a single ticker (currently AAPL) using the Polygon REST API, uploads raw JSON rows to Google BigQuery (partitioned by date), and runs dbt transformations.
 
----
+Process:
+- Extraction: fetches daily aggregates for a single hard-coded ticker via src/fetch_data.py.
+- Loading: writes raw JSON rows into partitioned BigQuery tables via src/bigquery_loader.py.
+- Orchestration: an Airflow DAG (dags/fetch_and_load_data_dag.py) invokes the ETL and then runs dbt.
+- Transformation: dbt project lives in dbt_core/.
 
-## 🚀 Project Overview
+Important files
+- src/main.py — main ETL entrypoint (calls fetch/load for a single ticker/date).
+- src/fetch_data.py — Polygon REST wrapper (daily aggregates).
+- src/bigquery_loader.py — BigQuery upload and dataset/table helpers.
+- dags/fetch_and_load_data_dag.py — Airflow DAG that triggers the ETL and dbt.
+- dbt_core/ — dbt project (models, macros, profiles).
+- secrets/ — local credential examples (do not commit secrets to public repos).
+- Dockerfile / docker-compose — containerized Airflow + dbt setup.
+- Makefile — developer convenience commands.
 
-This project simulates a modern data engineering workflow:
+Configuration / credentials
+- POLYGON_API_KEY: set in environment or config (see src/config.py).
+- Google credentials: set GOOGLE_APPLICATION_CREDENTIALS to a service account JSON if using BigQuery locally (secrets/gcp-prod-data-service-account-key.json is present locally but should not be committed publicly).
+- Check src/config.py for any hard-coded constants used by the ETL (ticker/date).
 
-1. **Data Extraction** – Python web scraper collects S&P 500 minute-level data.
-2. **Data Storage** – Raw data is stored in **Google BigQuery** (using the free Sandbox tier).
-3. **Transformation** – **dbt** models clean, aggregate, and prepare the data for analysis.
-4. **Orchestration** – **Apache Airflow** automates daily pipeline runs.
-5. **Version Control** – Code managed via **Git** and **GitHub**.
-6. **Containerization** – **Docker** ensures reproducible environments.
+Quick start — run locally
+1. Create venv and install deps:
+   make dev
+2. Set credentials:
+   export POLYGON_API_KEY="your_polygon_key"
+   export GOOGLE_APPLICATION_CREDENTIALS="/path/to/service-account.json"
+3. Run a single ETL execution:
+   python -m src.main
 
----
+Quick start — Airflow + dbt (containerized)
+1. Build and start containers:
+   docker-compose up --build
+2. The Airflow DAG file is at dags/fetch_and_load_data_dag.py — it calls the ETL and then runs dbt. Check the DAG id in that file to trigger/schedule via the Airflow UI.
 
-## 🧰 Tech Stack
-
-| Tool | Purpose |
-|------|----------|
-| **Python** | Data extraction & utilities |
-| **BeautifulSoup / Requests** | Web scraping |
-| **BigQuery (Sandbox)** | Data warehouse |
-| **dbt** | SQL-based data transformations |
-| **Airflow** | Workflow orchestration |
-| **Docker** | Containerized setup |
-| **Git & GitHub** | Version control and collaboration |
-
----
-
-## 🧩 Project Structure
+Notes & next steps
+- Current implementation processes one hard-coded ticker and a specific date.
+- The fetch function returns daily aggregates; there is no minute-level scraping implemented.
+- Keep secrets out of source control.
 
